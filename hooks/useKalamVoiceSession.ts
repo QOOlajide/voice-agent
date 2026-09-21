@@ -98,6 +98,7 @@ export function useKalamVoiceSession({
   const holdTimerRef = useRef<number | null>(null);
   const rescueLineIndexRef = useRef(0);
   const pendingStructuresRef = useRef<string[]>([]);
+  const initialCalibrationRef = useRef<"unknown" | "minimal" | "basic" | "beyond-basic">("unknown");
   const learnerNameRef = useRef(profile.givenName);
   const learnerOriginRef = useRef(profile.origin);
   const lastLearnerRef = useRef("");
@@ -176,6 +177,7 @@ export function useKalamVoiceSession({
         learnerName: learnerNameRef.current,
         learnerOrigin: learnerOriginRef.current,
         pendingStructures: pendingStructuresRef.current,
+        initialCalibration: initialCalibrationRef.current,
       }),
     );
   }, []);
@@ -259,6 +261,13 @@ export function useKalamVoiceSession({
       silenceStartedRef.current = null;
       clearTimer(holdTimerRef);
 
+      // The first simple participation is also a placement probe. A learner who
+      // spontaneously goes beyond the beginner frame should not be forced through
+      // the rest of the fixed beginner choreography.
+      if (beat.id === "ask-you") {
+        initialCalibrationRef.current = outcome.complexitySignal;
+      }
+
       if (outcome.name) {
         learnerNameRef.current = outcome.name;
         patchScene({ learnerGivenName: outcome.name, pulseNameTag: "learner" });
@@ -301,6 +310,11 @@ export function useKalamVoiceSession({
         .replaceAll("{place}", outcome.place ?? "نيجيريا");
 
       phaseRef.current = "recasting";
+      if (beat.id === "ask-you" && outcome.complexitySignal === "beyond-basic" && !scaffolded) {
+        // After acknowledging the learner naturally, jump to adaptive open mode.
+        // onSpeechEnded sees this sentinel index and enterOpenMode() runs next.
+        beatIndexRef.current = beatsRef.current.length - 1;
+      }
       speakLine(beat.speaker, say, "ar");
     },
     [patchScene, pushMoment, speakLine],
@@ -574,6 +588,7 @@ export function useKalamVoiceSession({
             learnerName: learnerNameRef.current,
             learnerOrigin: learnerOriginRef.current,
             pendingStructures: [],
+            initialCalibration: "unknown",
           }),
         );
       }
