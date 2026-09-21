@@ -39,17 +39,17 @@ export function SessionControls({
   }, [remaining]);
 
   return (
-    <div className="absolute bottom-10 left-1/2 flex -translate-x-1/2 flex-col items-center gap-4">
+    <div className="pointer-events-none absolute inset-x-0 top-0 z-20 flex items-start justify-between px-6 pt-6">
       <time
         dateTime={`PT${remaining}S`}
-        className="font-sans text-sm font-light tabular-nums tracking-[0.28em] text-white/70"
+        className="pointer-events-auto font-sans text-sm font-light tabular-nums tracking-[0.28em] text-white/70"
       >
         {formatTime(remaining)}
       </time>
       <button
         type="button"
         onClick={onEndSession}
-        className="rounded-full border border-red-500/50 bg-red-950/50 px-5 py-2 font-sans text-xs font-medium tracking-[0.18em] text-red-100 shadow-[0_0_22px_rgba(220,38,38,0.55)] transition-colors hover:bg-red-900/55 hover:shadow-[0_0_28px_rgba(239,68,68,0.7)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-red-400/70"
+        className="pointer-events-auto rounded-full border border-red-500/50 bg-red-950/50 px-5 py-2 font-sans text-xs font-medium tracking-[0.18em] text-red-100 shadow-[0_0_22px_rgba(220,38,38,0.55)] transition-colors hover:bg-red-900/55 hover:shadow-[0_0_28px_rgba(239,68,68,0.7)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-red-400/70"
       >
         End Session
       </button>

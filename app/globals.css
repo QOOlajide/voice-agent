@@ -3,6 +3,10 @@
 @theme {
   --font-sans: var(--font-ibm-plex-arabic), ui-sans-serif, system-ui, sans-serif;
   --animate-orb-pulse: orb-pulse 3.2s ease-in-out infinite;
+  --animate-tag-pulse: tag-pulse 0.9s ease-in-out 2;
+  --animate-speak-breathe: speak-breathe 1.6s ease-in-out infinite;
+  --animate-nod: nod 0.6s ease-in-out 1;
+  --animate-wave-arm: wave-arm 0.7s ease-in-out 2;
 }
 
 @keyframes orb-pulse {
@@ -12,5 +16,47 @@
   }
   50% {
     transform: scale(1.06);
+  }
+}
+
+@keyframes tag-pulse {
+  0%,
+  100% {
+    transform: scale(1);
+    box-shadow: 0 0 0 rgba(252, 211, 77, 0);
+  }
+  50% {
+    transform: scale(1.08);
+    box-shadow: 0 0 24px rgba(252, 211, 77, 0.45);
+  }
+}
+
+@keyframes speak-breathe {
+  0%,
+  100% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.03);
+  }
+}
+
+@keyframes nod {
+  0%,
+  100% {
+    transform: rotate(0deg);
+  }
+  40% {
+    transform: rotate(8deg);
+  }
+}
+
+@keyframes wave-arm {
+  0%,
+  100% {
+    transform: rotate(0deg);
+  }
+  50% {
+    transform: rotate(-18deg);
   }
 }

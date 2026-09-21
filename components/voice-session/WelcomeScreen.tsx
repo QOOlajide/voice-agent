@@ -1,15 +1,15 @@
 const STEPS = [
   {
-    title: "1. Step In",
-    body: "Transition to a sensory-isolated audio workspace.",
+    title: "1. Step in",
+    body: "A small social scene. People already there. Name tags, nothing else.",
   },
   {
-    title: "2. Listen & Speak",
-    body: "Focus purely on auditory learning. No text subtitles while conversing.",
+    title: "2. Talk",
+    body: "Arabic is the language. The scene carries meaning. Tiny clues only where it cannot.",
   },
   {
-    title: "3. Reflect",
-    body: "Instantly review your full Arabic script transcript and tailored grammar fixes post-session.",
+    title: "3. Leave a little stronger",
+    body: "You reused a structure because someone needed it — not because it was exercise 2.",
   },
 ] as const;
 
@@ -32,8 +32,7 @@ export function WelcomeScreen({ onBeginSession }: WelcomeScreenProps) {
           Speak Arabic. No Crutches.
         </h1>
         <p className="mt-5 max-w-xl text-sm font-light leading-relaxed text-zinc-400 md:text-base">
-          An immersive, voice-only playground. Speak uninterrupted, review your
-          transcript and grammar analysis afterward.
+          An immersive conversation. Teaching happens inside communication — not a quiz, not a script.
         </p>
 
         <div className="mx-auto my-12 grid w-full max-w-4xl grid-cols-1 gap-6 md:grid-cols-3">
