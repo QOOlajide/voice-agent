@@ -64,13 +64,20 @@ export function openConversationInstruction(opts: {
   learnerName?: string;
   learnerOrigin?: string;
   pendingStructures: string[];
+  initialCalibration?: "unknown" | "minimal" | "basic" | "beyond-basic";
 }) {
   const name = opts.learnerName ? ` Learner name: ${opts.learnerName}.` : "";
   const origin = opts.learnerOrigin ? ` They are from ${opts.learnerOrigin}.` : "";
+  const calibration = opts.initialCalibration ?? "unknown";
+  const calibrationInstruction = calibration === "beyond-basic"
+    ? " The learner spontaneously demonstrated Arabic beyond the beginner probe. Increase conversational complexity immediately, but one step at a time. Keep observing every response and move complexity up or down based on demonstrated comprehension and production; do not force beginner beats they have already surpassed."
+    : calibration === "basic"
+      ? " The learner handled the initial probe in basic Arabic. Continue near that level, probe gently upward, and adjust complexity after every response."
+      : " The learner has not yet demonstrated language beyond the simple probe. Keep the conversation comprehensible and increase complexity only as their responses provide evidence.";
   const pending = opts.pendingStructures.length
     ? ` Create natural social reasons to reuse (do not drill): ${opts.pendingStructures.join(", ")}.`
     : "";
-  return `OPEN MODE. You are Yusuf with Sami in a small gathering.${name}${origin}
+  return `OPEN MODE. You are Yusuf with Sami in a small gathering.${name}${origin}${calibrationInstruction}
 Continue a real Arabic conversation until the session ends. Known + a little new. Demonstrate with your life before asking.
 Rescue ONLY after a fair participation opportunity and only if they are blocked: (1) contextual re-model with gesture (2) clearer repetition (3) Arabic narrowing (4) tiny English one-job clue then Arabic (5) response starter.
 Never quiz. Never "repeat after me". Never end the conversation yourself.${pending}
