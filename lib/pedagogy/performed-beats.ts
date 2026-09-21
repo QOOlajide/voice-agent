@@ -369,7 +369,36 @@ export function firstSessionBeats(): PerformedBeat[] {
       language: "ar",
       lookAt: "learner",
       visualId: "nigeria",
+      modelItems: ["ana_min"],
       holdMs: 2500,
+    },
+    {
+      id: "identity-reuse",
+      kind: "participation",
+      speaker: "sami",
+      say: "وَأَنْتَ؟",
+      language: "ar",
+      lookAt: "learner",
+      gesture: "point-learner",
+      pulse: "learner",
+      goal: "identify-self",
+      recastFull: "آه، {name}! أَهْلًا يَا {name}.",
+      recastPartial: "آه، {name}! أَهْلًا يَا {name}.",
+      rescue: [
+        {
+          rung: "contextual-cue",
+          afterSilenceMs: 5000,
+          lines: [
+            { say: "أَنَا سَامِي", language: "ar", speaker: "sami", gesture: "point-self", pulse: "sami", holdMs: 900 },
+            { say: "وَأَنْتَ؟", language: "ar", speaker: "sami", lookAt: "learner", gesture: "point-learner", pulse: "learner" },
+          ],
+        },
+        {
+          rung: "response-starter",
+          afterSilenceMs: 11000,
+          lines: [{ say: "أَنَا…", language: "ar", speaker: "sami", lookAt: "learner", gesture: "point-learner" }],
+        },
+      ],
     },
     {
       id: "sami-welcome",
