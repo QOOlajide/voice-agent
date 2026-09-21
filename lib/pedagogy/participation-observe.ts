@@ -12,6 +12,8 @@ export type ParticipationOutcome =
       place?: string;
       usedAnaFrame: boolean;
       usedMinFrame: boolean;
+      /** Rough diagnostic signal only: should the scripted beginner probe continue? */
+      complexitySignal: "minimal" | "basic" | "beyond-basic";
     };
 
 const ARABIC_CHAR = /[\u0600-\u06FF]/;
@@ -53,6 +55,7 @@ export function observeParticipation(
   if (CONFUSION.test(n)) return { status: "blocked", reason: "confusion" };
 
   const parts = n.split(/\s+/).filter(Boolean);
+  const complexitySignal = parts.length >= 4 ? "beyond-basic" : parts.length >= 2 ? "basic" : "minimal";
   if (parts.length === 1 && (parts[0] === "انا" || parts[0] === "ana")) {
     return { status: "incomplete-frame" };
   }
@@ -74,6 +77,7 @@ export function observeParticipation(
             name: token,
             usedAnaFrame: parts[0] === "انا" || parts[0] === "ana",
             usedMinFrame: false,
+            complexitySignal,
           };
         }
       }
@@ -86,6 +90,7 @@ export function observeParticipation(
       name,
       usedAnaFrame,
       usedMinFrame: false,
+      complexitySignal,
     };
   }
 
@@ -110,6 +115,7 @@ export function observeParticipation(
     place,
     usedAnaFrame,
     usedMinFrame,
+    complexitySignal,
   };
 }
 
