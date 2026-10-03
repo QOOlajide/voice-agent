@@ -28,7 +28,12 @@ All data types are pydantic v2 models, so the type checker must understand them.
 2. **Ruff** for both linting and formatting, replacing Flake8, Black and isort.
    One tool means one config section in `pyproject.toml`, one version to pin and
    no conflicts between tools. (https://docs.astral.sh/ruff/)
-   Which lint rule groups to enable is decided when the config is written.
+   Lint rules (decided 2026-10-03): Ruff's defaults (`E4`, `E7`, `E9`, `F`) plus
+   - `B` (flake8-bugbear): known mistake patterns that run but behave wrongly,
+     e.g. a mutable default argument (B006) that would share one event log
+     across scenes;
+   - `I` (isort): import order, auto-fixed, so it costs nothing.
+   (https://docs.astral.sh/ruff/rules/)
 3. **Type checking is required.** It catches errors such as using an optional
    value that may be `None` (e.g. `LearnerTurn.word_timestamps`) before the code
    runs, on every line, not only the cases a test was written for. This enforces
