@@ -1,4 +1,4 @@
-# 3. Python tooling: uv, Ruff, pyright
+# 3. Python tooling: uv, Ruff, type checking with pyright
 
 Date: 2026-10-03
 Status: Accepted
@@ -29,7 +29,13 @@ All data types are pydantic v2 models, so the type checker must understand them.
    One tool means one config section in `pyproject.toml`, one version to pin and
    no conflicts between tools. (https://docs.astral.sh/ruff/)
    Which lint rule groups to enable is decided when the config is written.
-3. **pyright** for type checking, not mypy.
+3. **Type checking is required.** It catches errors such as using an optional
+   value that may be `None` (e.g. `LearnerTurn.word_timestamps`) before the code
+   runs, on every line, not only the cases a test was written for. This enforces
+   part of `CLAUDE.md`'s rule that bad or empty input never crashes the engine.
+   Tests and type checking complement each other.
+   (https://mypy.readthedocs.io/en/stable/getting_started.html#dynamic-vs-static-typing)
+4. **pyright** is the type checker, not mypy.
    - It is the engine behind VS Code's Python type checking (Pylance), so the
      editor shows exactly what CI enforces.
    - It understands pydantic models natively through the standard
