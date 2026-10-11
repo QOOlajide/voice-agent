@@ -46,6 +46,15 @@ All data types are pydantic v2 models, so the type checker must understand them.
    - It understands pydantic models natively through the standard
      `dataclass_transform` (PEP 681), with no plugin.
    - It is fast.
+   - Strictness (decided 2026-10-11): `strict` everywhere, relaxed only in the
+     CAMeL Tools adapter module. `standard` only checks values that carry a type
+     label; `strict` requires every function input and output to be labelled, so
+     nothing unlabelled slips past (e.g. one word passed where `list[str]` was
+     promised). Cheap to adopt while the engine is new, and it catches mistakes in
+     AI-written code that a reviewer might miss. CAMeL Tools has no type hints, so
+     strict's `reportUnknown*` and `reportMissingTypeStubs` errors are confined to
+     the one module that imports it.
+     (https://github.com/microsoft/pyright/blob/main/docs/configuration.md#diagnostic-settings-defaults)
 
 ## Consequences
 
