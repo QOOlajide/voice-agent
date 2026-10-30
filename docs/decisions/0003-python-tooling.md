@@ -25,6 +25,11 @@ All data types are pydantic v2 models, so the type checker must understand them.
    - Python is pinned to 3.12 (`.python-version`), so laptop and CI run the
      same interpreter.
    - uv installs fast, which matters for the large torch-based dependency tree.
+   - The engine is a uv **library** (`uv init --lib`, `src/` layout), not an
+     application: the CLI, the tests and later the voice server all import it
+     (`from talk_engine import ...`), and uv installs it into the environment
+     so that import works the same everywhere.
+     (https://docs.astral.sh/uv/concepts/projects/init/)
 2. **Ruff** for both linting and formatting, replacing Flake8, Black and isort.
    One tool means one config section in `pyproject.toml`, one version to pin and
    no conflicts between tools. (https://docs.astral.sh/ruff/)
