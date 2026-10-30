@@ -30,6 +30,20 @@ All data types are pydantic v2 models, so the type checker must understand them.
      (`from talk_engine import ...`), and uv installs it into the environment
      so that import works the same everywhere.
      (https://docs.astral.sh/uv/concepts/projects/init/)
+   - Rejected alternative: a `sys.path.insert(0, "../engine/src")` line in each
+     file that imports the engine. It (1) resolves relative to the folder the
+     command is run from, so running from another folder breaks the import;
+     (2) is invisible to pyright and editors, which analyse code without running
+     it, so strict mode reports the import as unresolved; (3) must be repeated in
+     the tests, the CLI and the voice server. The installed package is declared
+     once and works everywhere.
+   - How the editable install works (verified in `.venv`): uv writes
+     `talk_engine.pth`, a one-line pointer to `engine/src` that Python reads at
+     startup, so code edits apply without reinstalling; and
+     `talk_engine-0.1.0.dist-info/`, the installation record that
+     `importlib.metadata.version()` reads.
+     (https://docs.pytest.org/en/stable/explanation/goodpractices.html,
+     https://packaging.python.org/en/latest/discussions/src-layout-vs-flat-layout/)
 2. **Ruff** for both linting and formatting, replacing Flake8, Black and isort.
    One tool means one config section in `pyproject.toml`, one version to pin and
    no conflicts between tools. (https://docs.astral.sh/ruff/)
