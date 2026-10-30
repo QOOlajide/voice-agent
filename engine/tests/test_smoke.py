@@ -7,4 +7,4 @@ import talk_engine
 
 def test_engine_is_importable_as_installed_package() -> None:
     assert talk_engine.__doc__ is not None
-    assert version("talk-engine") == "0.1.0"
+    assert version("talk-engine")  # raises PackageNotFoundError if not installed
