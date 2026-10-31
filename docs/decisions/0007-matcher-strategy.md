@@ -1,4 +1,4 @@
-# 7. Matcher: patterns with optional parts; resolving an unnamed word
+# 7. Matcher: patterns with optional parts; resolving the word asked about
 
 Date: 2026-10-31
 Status: Accepted
@@ -37,6 +37,18 @@ Options considered:
 
    This extends `CLAUDE.md`, which only says to ask "Ayy kalimah?" when the
    named word cannot be resolved.
+
+3. **Half-heard words.** When the learner names a word, it is compared with the
+   words in Khālid's last line using fuzzy matching (Python's built-in
+   `difflib.get_close_matches`), not exact equality. The closest word above a
+   similarity cut-off is chosen; the cut-off (starting at 0.6) lives in config.
+   An exact match is rescued directly; a close match is first confirmed with a
+   gentle echo (e.g. "نقص؟"); no match above the cut-off → ask "Ayy kalimah?".
+   Comparing only against the last line keeps wrong guesses rare. Tested:
+   نقس → نقص (0.67, matched); نفس vs نقص (0.33, correctly rejected: different
+   words). (https://docs.python.org/3/library/difflib.html#difflib.get_close_matches)
+4. **Word bank correction.** If the learner asks about a word the word bank marks
+   as known, that word is marked **rusty**.
 
 ## Consequences
 
