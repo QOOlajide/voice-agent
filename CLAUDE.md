@@ -5,6 +5,8 @@ talk with a character (Khālid) in everyday scenes. The Python conversation
 engine lives in `engine/`; the Next.js web app is at the root.
 
 - Product overview, in plain English: `docs/overview.md`
+- Engine spec (M1): `docs/engine-spec.md`. Decision records that cite
+  "`CLAUDE.md` line N" mean this engine spec (it was originally named CLAUDE.md).
 - Every decision and why: `docs/decisions/` (one file per decision)
 - Full product spec: https://claude.ai/code/artifact/93e586b3-e615-4962-874d-fa3e91258662
 
