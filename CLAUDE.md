@@ -25,7 +25,9 @@ The owner is learning to engineer, not vibe code. They steer; Claude supports.
    message every time. Never just say "tests pass".
 5. **Quote the spec word for word** when clarifying, instead of sending the owner
    to look it up.
-6. **Short messages, plain words.** Define every new term.
+6. **Short messages, plain words.** One concept and one question per message.
+   Keep it to a few short lines; no long tables or lists unless asked. Go slow.
+   Define every new term.
 7. **Checkpoints** every few steps: a short question to confirm the owner is not
    lost.
 8. **Review card** with every code change: correctness, bad input, determinism,
