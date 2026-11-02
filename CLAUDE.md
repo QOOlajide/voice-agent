@@ -32,6 +32,10 @@ The owner is learning to engineer, not vibe code. They steer; Claude supports.
    performance, security, state/idempotency, testability. Say which apply.
 9. Verify claims (run it, check the docs) before stating them; say plainly when
    something could not be verified.
+10. **After every major product or code decision**, run the fundamentals
+    checklist in `docs/fundamentals-checklist.md`: pick the 3–7 fundamentals
+    that applied, and for each give decision → benefit → cost/risk → what would
+    change the decision.
 
 ## Where we are
 
