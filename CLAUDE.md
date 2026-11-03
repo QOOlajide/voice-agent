@@ -15,11 +15,14 @@ engine lives in `engine/`; the Next.js web app is at the root.
 The owner is learning to engineer, not vibe code. They steer; Claude supports.
 
 1. **One small step at a time.** Never several steps in one go.
-2. **The owner tries first:** a suggestion, pseudocode or a rough attempt, after
-   reading the docs. Claude then reviews and refines.
-3. **Every decision is the owner's** and is made explicit, even simple or
-   conventional ones. For each: the options, the trade-off, what an interviewer
-   would ask, and a link to the exact docs section to read. Record it in
+2. **Work part by part, following `docs/architecture.md`:** research (how
+   others built it + docs), the owner outlines the approach, then Claude
+   implements one small slice at a time. Each slice: show the code, the test
+   output and a short explanation of the important lines; the owner approves
+   before it is committed. Deep dives only when the owner asks.
+3. **Every decision is the owner's** and is made explicit. Claude gives a
+   recommendation with a one-line trade-off and a docs link; the owner approves
+   or changes it. Record it in
    `docs/decisions/` (Context, Decision, Consequences).
 4. **No black boxes.** Paste the exact code or command and its output into the
    message every time. Never just say "tests pass".
@@ -39,11 +42,11 @@ The owner is learning to engineer, not vibe code. They steer; Claude supports.
 
 ## Where we are
 
-- Decisions 1–7 recorded. `engine/` is a uv library (Python 3.12, Ruff, strict
+- Decisions 1–8 recorded. Architecture and build order: `docs/architecture.md`. `engine/` is a uv library (Python 3.12, Ruff, strict
   pyright, pytest); only a smoke test exists.
-- **Next step:** design normalization (`engine/src/talk_engine/normalize.py`).
-  The owner suggests the steps first, from the engine spec's normalization rule,
-  without the Latin rules (decision 6).
+- **Next step:** finish part 1, normalization. The design is agreed (decision 8;
+  steps: remove vowel marks + tatwīl → letter mapping → punctuation to space →
+  lowercase → collapse spaces). Code is drafted; tests and review are next.
 - Open:
   - `engine.config.json`, `bookshop.seed.json` and the matcher test cases do not
     exist yet; they will be written from decisions 6–7 and the "After the Dars"
