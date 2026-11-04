@@ -28,7 +28,7 @@ from talk_engine.normalize import normalize
         # 8. English lowercased (the apostrophe becomes a space)
         ("I DON'T", "i don t"),
         # 9. spaces collapsed and trimmed
-        ("  اعد   من ", "اعد من"),
+        (" " * 2 + "اعد" + " " * 3 + "من" + " ", "اعد من"),
         # 13. hamza stored as a separate mark
         ("\u0627\u0654عد", "اعد"),
         # 14. lam-alef ligature stored as one character
