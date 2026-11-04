@@ -42,11 +42,10 @@ The owner is learning to engineer, not vibe code. They steer; Claude supports.
 
 ## Where we are
 
-- Decisions 1–8 recorded. Architecture and build order: `docs/architecture.md`. `engine/` is a uv library (Python 3.12, Ruff, strict
+- Decisions 1–11 recorded. Architecture and build order: `docs/architecture.md`. `engine/` is a uv library (Python 3.12, Ruff, strict
   pyright, pytest); only a smoke test exists.
-- **Next step:** finish part 1, normalization. The design is agreed (decision 8;
-  steps: remove vowel marks + tatwīl → letter mapping → punctuation to space →
-  lowercase → collapse spaces). Code is drafted; tests and review are next.
+- Part 1 (normalize) is done: `engine/src/talk_engine/normalize.py` + tests.
+- **Next step:** part 2, data types + config loading (pydantic).
 - Open:
   - `engine.config.json`, `bookshop.seed.json` and the matcher test cases do not
     exist yet; they will be written from decisions 6–7 and the "After the Dars"

@@ -33,6 +33,11 @@ using CAMeL Tools' character sets as the reference, credited in the code.
 
 - Tatwīl (`ـ`) is added ourselves: the spec requires stripping it, and
   `AR_DIAC_CHARSET` does not include it.
+- **Step 0, Unicode NFKC** (added 2026-11-04): rewrites characters that look the
+  same but are stored differently into one standard form, before the other
+  steps. Found by testing failure modes: alef + a separate hamza mark (U+0654)
+  was split into two words, and the lam-alef ligature ﻻ (U+FEFB) did not match
+  لا. (https://docs.python.org/3/library/unicodedata.html#unicodedata.normalize)
 - Teh marbuta is **not** normalized (ة stays ة). Transcriber variants such as
   طبعه vs طبعة are left to fuzzy matching (decision 7).
 
