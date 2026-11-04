@@ -43,7 +43,7 @@ The owner is learning to engineer, not vibe code. They steer; Claude supports.
 ## Where we are
 
 - Decisions 1–11 recorded. Architecture and build order: `docs/architecture.md`. `engine/` is a uv library (Python 3.12, Ruff, strict
-  pyright, pytest); only a smoke test exists.
+  pyright, pytest); normalize + 24 test runs.
 - Part 1 (normalize) is done: `engine/src/talk_engine/normalize.py` + tests.
 - **Next step:** part 2, data types + config loading (pydantic).
 - Open:

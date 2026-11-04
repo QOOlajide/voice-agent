@@ -30,9 +30,9 @@ from talk_engine.normalize import normalize
         # 9. spaces collapsed and trimmed
         ("  اعد   من ", "اعد من"),
         # 13. hamza stored as a separate mark
-        ("أعد", "اعد"),
+        ("\u0627\u0654عد", "اعد"),
         # 14. lam-alef ligature stored as one character
-        ("ﻻ افهم", "لا افهم"),
+        ("\ufefb افهم", "لا افهم"),
     ],
 )
 def test_normalize_cases(raw: str, expected: str) -> None:
@@ -48,7 +48,7 @@ def test_punctuation_only_becomes_empty(junk: str) -> None:  # 16. crash prevent
     assert normalize(junk) == ""
 
 
-@pytest.mark.parametrize("raw", ["أَعِدْ  من فضلك؟", "I DON'T", "ٱلكتاب", "ﻻ"])
+@pytest.mark.parametrize("raw", ["أَعِدْ  من فضلك؟", "I DON'T", "ٱلكتاب", "\ufefb"])
 def test_running_twice_changes_nothing(raw: str) -> None:  # 11.
     once = normalize(raw)
     assert normalize(once) == once

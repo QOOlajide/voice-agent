@@ -10,16 +10,16 @@ import unicodedata
 
 # Step 2: vowel marks (tanwīn U+064B–U+064D, harakat U+064E–U+0652,
 # dagger alef U+0670) plus tatwīl U+0640, which CAMeL's list does not include.
-_MARKS = re.compile("[ً-ْٰـ]")
+_MARKS = re.compile("[\u064b-\u0652\u0670\u0640]")
 
 # Step 3: one mapping for every letter swap.
 _LETTER_MAP = str.maketrans(
     {
-        "أ": "ا",  # أ → ا
-        "إ": "ا",  # إ → ا
-        "آ": "ا",  # آ → ا
-        "ٱ": "ا",  # ٱ → ا
-        "ى": "ي",  # ى → ي
+        "\u0623": "\u0627",  # أ → ا
+        "\u0625": "\u0627",  # إ → ا
+        "\u0622": "\u0627",  # آ → ا
+        "\u0671": "\u0627",  # ٱ → ا
+        "\u0649": "\u064a",  # ى → ي
     }
 )
 
