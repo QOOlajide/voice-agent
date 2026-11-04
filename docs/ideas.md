@@ -25,3 +25,17 @@ emotion recognition in education settings (Article 5). Revisit only with:
 opt-in camera and clear consent; processing on the device; used as a hint
 combined with voice signals (hesitation, stuck phrases), never alone; and a test
 showing it catches stuck moments that voice misses.
+
+### 2a. "Live" scenes: the vision and the research to do (parked)
+Vision: the scene feels live; when the learner is stuck on "book", Khālid's
+hands hold the book up. Faceless hands fit the spec. Two ways to build it:
+generated during the conversation (unique, but seconds of delay and no face
+check) or prepared once per prop and played instantly on the `cue` event (the
+spec's choice: "nothing is generated during a conversation").
+
+Research before deciding (M2 spike / M4):
+- **Praktika:** the closest product; streams audio so the avatar's mouth matches
+  the speech. Note the spec chose faceless partly to avoid uncanny lip-sync.
+- **Talkpal:** its call mode lets you just call and talk freely.
+- Audio-to-visual latency; cost of generating images; how others generate
+  faceless images reliably; faceless asset sources (e.g. CGTrader).
