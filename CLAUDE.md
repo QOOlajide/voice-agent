@@ -42,10 +42,14 @@ The owner is learning to engineer, not vibe code. They steer; Claude supports.
 
 ## Where we are
 
-- Decisions 1–11 recorded. Architecture and build order: `docs/architecture.md`. `engine/` is a uv library (Python 3.12, Ruff, strict
+- Decisions 1–12 recorded. Architecture and build order: `docs/architecture.md`. `engine/` is a uv library (Python 3.12, Ruff, strict
   pyright, pytest); normalize + 24 test runs.
 - Part 1 (normalize) is done: `engine/src/talk_engine/normalize.py` + tests.
-- **Next step:** part 2, data types + config loading (pydantic).
+- Part 2, slice 1 (stuck-phrase config) is done: `engine/config/engine.config.json`,
+  `engine/src/talk_engine/config.py` + tests (decision 12).
+- **Next step:** part 3, the matcher. Decide first: fillers around stuck phrases
+  ("امم", "يعني", "umm") and whole-sentence match vs search; log each match as an
+  event.
 - Open:
   - `engine.config.json`, `bookshop.seed.json` and the matcher test cases do not
     exist yet; they will be written from decisions 6–7 and the "After the Dars"
