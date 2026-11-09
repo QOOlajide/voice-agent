@@ -42,7 +42,7 @@ The owner is learning to engineer, not vibe code. They steer; Claude supports.
 
 ## Where we are
 
-- Decisions 1–12 recorded. Architecture and build order: `docs/architecture.md`. `engine/` is a uv library (Python 3.12, Ruff, strict
+- Decisions 1–13 recorded. Architecture and build order: `docs/architecture.md`. `engine/` is a uv library (Python 3.12, Ruff, strict
   pyright, pytest); normalize + 24 test runs.
 - Part 1 (normalize) is done: `engine/src/talk_engine/normalize.py` + tests.
 - Part 2, slice 1 (stuck-phrase config) is done: `engine/config/engine.config.json`,
