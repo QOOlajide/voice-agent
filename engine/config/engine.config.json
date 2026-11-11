@@ -1,0 +1,76 @@
+{
+  "version": "0.1.0",
+  "stuck_phrases": [
+    {
+      "id": "understood_but_not",
+      "action": "rescue_term",
+      "entry_rung": 3,
+      "patterns_ar": [
+        "فهمت.* لكن (لم افهم|ما فهمت)( (?P<missed_term>\\S+))?"
+      ],
+      "patterns_en": [
+        "i understood.* but not( (?P<missed_term>\\S+))?"
+      ]
+    },
+    {
+      "id": "what_do_you_mean",
+      "action": "rescue_last_line",
+      "entry_rung": 3,
+      "patterns_ar": [
+        "(ماذا|ما) تعني بذلك"
+      ],
+      "patterns_en": [
+        "what do you mean( by that)?",
+        "what does (that|this) mean"
+      ]
+    },
+    {
+      "id": "what_does_x_mean",
+      "action": "rescue_term",
+      "entry_rung": 3,
+      "patterns_ar": [
+        "ما معني( (ال)?كلم[ةه])?( (?P<missed_term>\\S+))?"
+      ],
+      "patterns_en": [
+        "what does( (?P<missed_term>\\S+))? mean",
+        "وات دز( (?P<missed_term>\\S+))? مين"
+      ]
+    },
+    {
+      "id": "do_you_mean",
+      "action": "confirm",
+      "patterns_ar": [
+        "هل تقصد( (?P<missed_term>.+))?"
+      ],
+      "patterns_en": [
+        "do you mean( (?P<missed_term>.+))?"
+      ]
+    },
+    {
+      "id": "repeat_please",
+      "action": "repeat",
+      "entry_rung": 2,
+      "patterns_ar": [
+        "(اعد|كرر)( من فضلك)?"
+      ],
+      "patterns_en": [
+        "(repeat|say (it|that) again)( please)?",
+        "ريبيت( بليز)?"
+      ]
+    },
+    {
+      "id": "didnt_understand",
+      "action": "ladder",
+      "entry_rung": 1,
+      "patterns_ar": [
+        "لم افهم",
+        "ما فهمت",
+        "لا افهم"
+      ],
+      "patterns_en": [
+        "i (don t|didn t|do not|did not) (understand|get it)",
+        "اي دونت اندرستاند"
+      ]
+    }
+  ]
+}

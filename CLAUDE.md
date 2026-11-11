@@ -39,13 +39,21 @@ The owner is learning to engineer, not vibe code. They steer; Claude supports.
     checklist in `docs/fundamentals-checklist.md`: pick the 3–7 fundamentals
     that applied, and for each give decision → benefit → cost/risk → what would
     change the decision.
+11. **A question gets an answer, nothing else.** When the owner asks a
+    question, answer that question only. Do not run extra commands, start
+    other work or add unrequested sections; run something only if it is needed
+    to answer the question.
 
 ## Where we are
 
-- Decisions 1–11 recorded. Architecture and build order: `docs/architecture.md`. `engine/` is a uv library (Python 3.12, Ruff, strict
+- Decisions 1–13 recorded. Architecture and build order: `docs/architecture.md`. `engine/` is a uv library (Python 3.12, Ruff, strict
   pyright, pytest); normalize + 24 test runs.
 - Part 1 (normalize) is done: `engine/src/talk_engine/normalize.py` + tests.
-- **Next step:** part 2, data types + config loading (pydantic).
+- Part 2, slice 1 (stuck-phrase config) is done: `engine/config/engine.config.json`,
+  `engine/src/talk_engine/config.py` + tests (decision 12).
+- **Next step:** part 3, the matcher. Decide first: fillers around stuck phrases
+  ("امم", "يعني", "umm") and whole-sentence match vs search; log each match as an
+  event.
 - Open:
   - `engine.config.json`, `bookshop.seed.json` and the matcher test cases do not
     exist yet; they will be written from decisions 6–7 and the "After the Dars"
