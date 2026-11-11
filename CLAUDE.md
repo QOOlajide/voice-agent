@@ -39,6 +39,10 @@ The owner is learning to engineer, not vibe code. They steer; Claude supports.
     checklist in `docs/fundamentals-checklist.md`: pick the 3–7 fundamentals
     that applied, and for each give decision → benefit → cost/risk → what would
     change the decision.
+11. **A question gets an answer, nothing else.** When the owner asks a
+    question, answer that question only. Do not run extra commands, start
+    other work or add unrequested sections; run something only if it is needed
+    to answer the question.
 
 ## Where we are
 
