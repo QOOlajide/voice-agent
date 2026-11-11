@@ -51,8 +51,7 @@
       "action": "repeat",
       "entry_rung": 2,
       "patterns_ar": [
-        "(اعد|كرر)( من فضلك)?",
-        "من فضلك (اعد|كرر)"
+        "(اعد|كرر)( من فضلك)?"
       ],
       "patterns_en": [
         "(repeat|say (it|that) again)( please)?",
