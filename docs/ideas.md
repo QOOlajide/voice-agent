@@ -39,3 +39,16 @@ Research before deciding (M2 spike / M4):
 - **Talkpal:** its call mode lets you just call and talk freely.
 - Audio-to-visual latency; cost of generating images; how others generate
   faceless images reliably; faceless asset sources (e.g. CGTrader).
+
+### 2b. Focus on what the learner can do; let them move on (parked)
+Turning every mistake into a learning moment, even a discreet one, can feel
+overwhelming, and the learner already gets feedback in the summary. Idea:
+Khālid focuses on what the learner does understand, and only works on what
+they don't when it blocks the goal (decision 16: goals made of steps). The
+learner can wave a gap off ("لا بأس إن شاء الله") and carry on, if there is
+another way to reach the goal.
+
+Fits the spec's direction ("Help escalates only as far as needed";
+"explicit contrast only on repeated slips"). To decide later: how the
+engine knows a gap blocks a required step, and how a wave-off is detected
+(a stuck-phrase-like pattern, or the hybrid step report).
