@@ -94,18 +94,23 @@ def test_normal_or_empty_input_is_not_stuck(said: str) -> None:
     assert MATCHER.match(said) is None
 
 
-def test_result_carries_what_the_ladder_needs() -> None:
-    found = MATCHER.match("ما معنى طبعة")
+@pytest.mark.parametrize(
+    ("said", "action", "entry_rung", "language"),
+    [
+        ("ما معنى طبعة", "rescue_term", 3, "ar"),
+        ("I didn't understand", "ladder", 1, "en"),  # English is labelled "en"
+    ],
+)
+def test_result_carries_what_the_ladder_needs(
+    said: str, action: str, entry_rung: int, language: str
+) -> None:
+    found = MATCHER.match(said)
     assert found is not None
-    assert found.action == "rescue_term"
-    assert found.entry_rung == 3
-    assert found.language == "ar"
-
-
-def test_english_match_is_labelled_english() -> None:
-    found = MATCHER.match("I didn't understand")
-    assert found is not None
-    assert found.language == "en"
+    assert (found.action, found.entry_rung, found.language) == (
+        action,
+        entry_rung,
+        language,
+    )
 
 
 @pytest.mark.parametrize(
