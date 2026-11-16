@@ -5,7 +5,7 @@ from pathlib import Path
 import pytest
 
 from talk_engine.config import load_config
-from talk_engine.matcher import StuckMatcher, is_hesitation, resolve_term
+from talk_engine.matcher import StuckMatcher, resolve_term, said_nothing
 
 CONFIG_PATH = Path(__file__).parent.parent / "config" / "engine.config.json"
 MATCHER = StuckMatcher(load_config(CONFIG_PATH))
@@ -211,15 +211,15 @@ def test_resolution_works_on_a_real_match() -> None:  # matcher + resolution
     assert resolve_term(found.missed_term, TARGETS) == "البيت الجديد"
 
 
-# --- is_hesitation(): did they say nothing? (empty input only, for now) -----
+# --- said_nothing(): is there nothing in the text? (a fact, not a judgement) -
 
 
 @pytest.mark.parametrize("said", ["", "   ", "…", "؟", "\n"])
-def test_saying_nothing_is_hesitation(said: str) -> None:
-    assert is_hesitation(said)
+def test_empty_or_punctuation_only_says_nothing(said: str) -> None:
+    assert said_nothing(said)
 
 
 @pytest.mark.parametrize("said", ["لم افهم", "a", "امم"])
-def test_saying_something_is_not_hesitation(said: str) -> None:
-    # "امم" (a filler alone) is not covered yet; it comes with timing later
-    assert not is_hesitation(said)
+def test_any_word_says_something(said: str) -> None:
+    # "امم" (a filler alone) is a word here; fillers are judged by the ladder
+    assert not said_nothing(said)

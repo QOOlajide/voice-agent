@@ -54,7 +54,7 @@ The owner is learning to engineer, not vibe code. They steer; Claude supports.
 - Part 2, slice 1 (stuck-phrase config) is done: `engine/config/engine.config.json`,
   `engine/src/talk_engine/config.py` + tests (decision 12).
 - Part 3 (matcher) is done for the skeleton: `match()`, exact `resolve_term()`,
-  empty-input `is_hesitation()` (`matcher.py`, decision 14). The owner reviews
+  `said_nothing()` (`matcher.py`, decision 14). The owner reviews
   the code and tests next.
 - **Next step:** part 4, the ladder + step-down (decision 15).
 - Open:

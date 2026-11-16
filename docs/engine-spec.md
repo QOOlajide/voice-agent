@@ -41,7 +41,8 @@ Defined in `config/engine.config.json`, **matched in array order** (specific phr
 |---|---|
 | lam afham (I didn't understand) | ladder from rung 1 |
 | aʿid min faḍlik (repeat, please) | rung 2 |
-| hesitation: "uhh", "hmm", "…", empty transcript | rung 2 |
+| hesitation: "uhh", "hmm" | rung 2 |
+| said nothing ("…", empty transcript) | not stuck by itself: the ladder combines it with silence timing, tone and transcriber status (decision 14) |
 | mā maʿnā X? | rung 3 on word X only |
 | fahimtu … lākin lam afham X | rung 3 on word X only |
 | mā taʿnī bi-dhālik? | rung 3 on the character's last phrase |

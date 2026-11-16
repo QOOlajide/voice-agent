@@ -47,9 +47,25 @@ or more words around it.
    returned. None means Khālid asks "which word?". Later: fuzzy matching
    (`difflib`, decision 7), the "last few words" fallback, attached pronouns
    and the article (see Consequences).
-10. **Hesitation, empty input only** (`is_hesitation`): text that is empty
-    once cleaned (spaces, "…") counts as hesitation (spec: rung 2).
-    Filler-only turns ("امم") and silence timing (decision 11) come later.
+10. **`said_nothing()`, a fact, not a judgement.** Text that is empty once
+    cleaned (spaces, "…") returns True. It was first named `is_hesitation`,
+    with the spec's "empty transcript → rung 2". Renamed because silence does
+    not mean confusion: the learner may be thinking, there may be background
+    noise, or the transcriber may have missed them. The spec row changed: said
+    nothing is not stuck by itself; the ladder decides, combining it with
+    silence timing (decision 11), tone (idea 2c) and transcriber status, in
+    one place outside this function (those signals come from the voice
+    layer). Rejected: deleting the function (the check would move into the
+    ladder and be copied wherever needed).
+11. **Missed speech → ask to repeat, only with evidence** (open, voice part).
+    Two kinds of transcriber failure: down or unavailable (spec: "Switch to
+    the configured fallback provider for the rest of the session"), and did
+    not hear properly. For the second, Khālid asks the learner to repeat
+    ("عفواً، ممكن تعيد؟") only when there is evidence speech happened: the
+    voice detector heard speech but the transcript is empty, or the
+    transcriber's confidence is low (spec decision 11: "confidence check").
+    Silence with no speech detected is the learner being quiet, not a miss;
+    otherwise Khālid would ask to repeat every time the learner pauses.
 
 ### Coding decisions (line-by-line review of `matcher.py`)
 

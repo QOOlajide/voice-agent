@@ -103,10 +103,12 @@ def resolve_term(term: str, target_words: Iterable[str]) -> str | None:
     return best
 
 
-def is_hesitation(text: str) -> bool:
+def said_nothing(text: str) -> bool:
     """Return True if `text` says nothing once cleaned: empty, spaces or "…".
 
-    The engine spec counts this as hesitation (rung 2). Filler-only turns
-    ("امم", "uhh") and silence timing (decision 11) come later.
+    A fact about the text, not a judgement: silence does not mean confusion
+    (the learner may be thinking, or the transcriber may have missed them).
+    The ladder decides what it means, together with silence timing (decision
+    11), tone (idea 2c) and transcriber status (decision 14).
     """
     return normalize(text) == ""
