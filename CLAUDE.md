@@ -60,6 +60,8 @@ The owner is learning to engineer, not vibe code. They steer; Claude supports.
 - Open:
   - The seed (decision 16): bookshop or the mosque scene.
   - Stuck-phrase edge cases E1–E4 and E6 (decision 14).
+  - Tone and vocal cues (`docs/ideas.md` 2c): raise it whenever the work touches
+    the voice pipeline, the ladder's inputs or the directive.
   - No CI yet.
 
 ## Checks (run from `engine/`)

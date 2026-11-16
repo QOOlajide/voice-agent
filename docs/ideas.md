@@ -54,3 +54,23 @@ Fits the spec's direction ("Help escalates only as far as needed";
 judgement fits with the engine's control (e.g. he reports "gap not pivotal"
 the way he reports a step, and the engine records it, like the hybrid in
 decision 16).
+
+### 2c. Tone and vocal cues (open question, raise during the voice part)
+The cascaded pipeline (speech → text → LLM → text → speech) drops the
+learner's tone: Khālid sees words, not whether the learner is joking,
+frustrated, unsure or confident. That is the trade made so the engine can
+check Khālid's line before the learner hears it (speech-to-speech models
+hear tone directly; see OpenAI "Hello GPT-4o" and the Moshi paper,
+arXiv 2410.00037).
+
+Directions to research, not decided:
+1. **Tone classifier (owner's priority):** a model listening to the same
+   audio, outputting a label ("unsure", "laughing"…) that the engine passes
+   to Khālid in the directive. "Unsure" vs "confident" matters most for a
+   tutor: it should change how much the ladder helps.
+2. **Timing signals:** pauses, restarts, slow speech, from word timestamps.
+3. **Expressive voice for Khālid:** TTS that can sound encouraging or laugh.
+4. **Speech-to-speech:** already in the spec's "Later" list.
+
+Claude: bring this up whenever the work touches the voice pipeline, the
+ladder's inputs or the directive.
