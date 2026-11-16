@@ -57,6 +57,10 @@ or more words around it.
     one place outside this function (those signals come from the voice
     layer). Rejected: deleting the function (the check would move into the
     ladder and be copied wherever needed).
+    The same holds for fillers: "uhh" or "امم" is often followed by speech,
+    so the spec's "hesitation: uhh, hmm → rung 2" was changed too. A filler
+    followed by speech is no signal (the speech is matched as usual, item 1);
+    a filler alone is treated like said nothing: the ladder decides.
 11. **Missed speech → ask to repeat, only with evidence** (open, voice part).
     Two kinds of transcriber failure: down or unavailable (spec: "Switch to
     the configured fallback provider for the rest of the session"), and did
