@@ -1,7 +1,7 @@
 # 14. Matcher rules: search for whole-word phrases, first match in config order wins
 
 Date: 2026-11-11
-Status: Accepted. Start-up half built; `match()` still under review.
+Status: Accepted
 
 ## Context
 
@@ -33,6 +33,24 @@ or more words around it.
    Under search, `(اعد|كرر)( من فضلك)?` always matches first, and both lines
    lead to the same spec row (rung 2). Found by the test for decision 5.
 
+8. **The term is everything after the trigger, raw** (E5, option B). The
+   term patterns capture `(?P<missed_term>.+)` instead of one word (`\S+`), so
+   multi-word terms ("البيت الجديد") are kept whole, and fillers around the
+   term are kept too. Rejected: stopping at a list of known fillers (a
+   lookahead such as `(?=\s+(?:يا استاذ|يعني)|$)`): it breaks on every filler
+   not on the list, misses fillers before the term, and regex cannot tell
+   vocabulary from filler.
+9. **Resolution finds the target inside the term** (`resolve_term`): exact
+   matching only for now. A target counts when it appears in the term as
+   whole words, after normalizing both; the longest wins (most words, then
+   most letters; ties go to the first listed); the seed's spelling is
+   returned. None means Khālid asks "which word?". Later: fuzzy matching
+   (`difflib`, decision 7), the "last few words" fallback, attached pronouns
+   and the article (see Consequences).
+10. **Hesitation, empty input only** (`is_hesitation`): text that is empty
+    once cleaned (spaces, "…") counts as hesitation (spec: rung 2).
+    Filler-only turns ("امم") and silence timing (decision 11) come later.
+
 ### Coding decisions (line-by-line review of `matcher.py`)
 
 | Code | Chosen | Rejected | Why |
@@ -42,6 +60,8 @@ or more words around it.
 | `for phrase in config.stuck_phrases` | as written | `for name, value in config` | Looping over the model yields `(field name, value)` pairs, including `version`; it needs extra steps and gives `value` the type `Any`, so pyright can no longer check it |
 | `by_language` | Type aliases `Patterns`, `LanguagePatterns`; exactly two pairs `tuple[LanguagePatterns, LanguagePatterns]` | One nested label `tuple[tuple[Language, tuple[str, ...]], ...]` | One idea per line is easier to read; the type says "two languages" because there are two, and a new language changes it on purpose |
 | each entry | 4-item tuple per entry | `NamedTuple` | Fewer lines; `NamedTuple` reads better (`entry.compiled`), still proposed |
+| `entries` (build-time list) | `entries` | `found` | `found` also names the regex match in `match()`; one name, one meaning |
+| `resolve_term` whole-word check | pad with spaces: `f" {needle} " in f" {term} "` | a regex per target | normalized text has single spaces only, so padding is exact and simple |
 
 Open: `StuckMatch` as pydantic model (recommended: consistent with config,
 `model_dump_json()` for the event log) or frozen dataclass (measured 0.24 µs
@@ -58,6 +78,10 @@ faster per object, which is negligible).
   - E3: dialect "ما فهمتش" is missed.
   - E4: "ما معنى هذا" / "what does it mean" return the term "هذا" / "it"
     instead of `what_do_you_mean`.
-  - E5: `\S+` captures one word, so "الطبعة الثانية" becomes "الطبعة".
+  - E5: decided, see item 8.
+  - E6: the article. Exact resolution treats "الطبعة" and "طبعة" as different
+    words, so a learner saying "ما معنى الطبعة" with target "طبعة" gets
+    "which word?". To decide: strip "ال" before comparing, or list both forms
+    in the seed.
 - Hesitation (spec: "uhh", "hmm", "…", empty transcript → rung 2) is a
   separate check, not built yet; the stuck matcher returns None for it.

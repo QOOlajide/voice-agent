@@ -6,10 +6,10 @@
       "action": "rescue_term",
       "entry_rung": 3,
       "patterns_ar": [
-        "فهمت.* لكن (لم افهم|ما فهمت)( (?P<missed_term>\\S+))?"
+        "فهمت.* لكن (لم افهم|ما فهمت)( (?P<missed_term>.+))?"
       ],
       "patterns_en": [
-        "i understood.* but not( (?P<missed_term>\\S+))?"
+        "i understood.* but not( (?P<missed_term>.+))?"
       ]
     },
     {
@@ -29,11 +29,11 @@
       "action": "rescue_term",
       "entry_rung": 3,
       "patterns_ar": [
-        "ما معني( (ال)?كلم[ةه])?( (?P<missed_term>\\S+))?"
+        "ما معني( (ال)?كلم[ةه])?( (?P<missed_term>.+))?"
       ],
       "patterns_en": [
-        "what does( (?P<missed_term>\\S+))? mean",
-        "وات دز( (?P<missed_term>\\S+))? مين"
+        "what does( (?P<missed_term>.+))? mean",
+        "وات دز( (?P<missed_term>.+))? مين"
       ]
     },
     {

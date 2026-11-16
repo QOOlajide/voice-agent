@@ -4,11 +4,13 @@ The matcher only recognizes; deciding what happens next is the ladder's job.
 """
 
 import re
+from collections.abc import Iterable
 from typing import Literal
 
 from pydantic import BaseModel, ConfigDict
 
 from talk_engine.config import Action, EngineConfig, StuckPhrase
+from talk_engine.normalize import normalize
 
 Language = Literal["ar", "en"]
 Patterns = tuple[str, ...]  # one language's patterns, any number of them
@@ -41,7 +43,7 @@ class StuckMatcher:
         # Compile every pattern once. Each is wrapped in \b...\b so it only matches
         # whole words ("اعد" must not match inside "ساعده"); pattern authors do not
         # have to remember this.
-        found: list[tuple[StuckPhrase, Language, str, re.Pattern[str]]] = []
+        entries: list[tuple[StuckPhrase, Language, str, re.Pattern[str]]] = []
         for phrase in config.stuck_phrases:
             # Exactly two: Arabic, then English. A new language changes this type.
             by_language: tuple[LanguagePatterns, LanguagePatterns] = (
@@ -51,7 +53,60 @@ class StuckMatcher:
             for language, patterns in by_language:
                 for pattern in patterns:
                     compiled = re.compile(rf"\b(?:{pattern})\b")
-                    found.append((phrase, language, pattern, compiled))
+                    entries.append((phrase, language, pattern, compiled))
         # A tuple, not a list: once built, no code can add, remove or reorder
         # patterns. One matcher is shared by every conversation.
-        self._patterns = tuple(found)
+        self._patterns = tuple(entries)
+
+    def match(self, text: str) -> StuckMatch | None:
+        """Return the first stuck phrase found in `text`, or None if there is none.
+
+        `text` is normalized here, so callers cannot forget to. The phrase is
+        searched for anywhere in the text, so fillers around it ("امم", "يعني")
+        do not prevent a match; they stay in the raw transcript as data.
+        """
+        clean = normalize(text)
+        for phrase, language, pattern, compiled in self._patterns:
+            found = compiled.search(clean)
+            if found:
+                return StuckMatch(
+                    phrase_id=phrase.id,
+                    action=phrase.action,
+                    entry_rung=phrase.entry_rung,
+                    language=language,
+                    pattern=pattern,
+                    matched_text=found.group(0),
+                    missed_term=found.groupdict().get("missed_term"),
+                )
+        return None
+
+
+def resolve_term(term: str, target_words: Iterable[str]) -> str | None:
+    """Return the target word or phrase the learner named inside `term`, or None.
+
+    `term` is a StuckMatch.missed_term: everything after the trigger, raw, so it
+    may hold fillers ("يعني طبعة امم") or several words ("البيت الجديد").
+    Exact matching only (decision 14): a target counts when it appears in the
+    term as whole words, after normalizing both. The longest target wins (most
+    words, then most letters; on a tie, the first in `target_words`), so
+    "البيت الجديد" beats "البيت". The target is returned as written in the
+    seed. None means the engine asks "which word?" (engine spec).
+    """
+    padded = f" {normalize(term)} "  # spaces at both ends make whole-word checks
+    best: str | None = None
+    best_size = (0, 0)
+    for target in target_words:
+        needle = normalize(target)
+        size = (len(needle.split()), len(needle))
+        if needle and f" {needle} " in padded and size > best_size:
+            best, best_size = target, size
+    return best
+
+
+def is_hesitation(text: str) -> bool:
+    """Return True if `text` says nothing once cleaned: empty, spaces or "…".
+
+    The engine spec counts this as hesitation (rung 2). Filler-only turns
+    ("امم", "uhh") and silence timing (decision 11) come later.
+    """
+    return normalize(text) == ""

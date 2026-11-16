@@ -53,11 +53,13 @@ The owner is learning to engineer, not vibe code. They steer; Claude supports.
 - Part 1 (normalize) is done: `engine/src/talk_engine/normalize.py` + tests.
 - Part 2, slice 1 (stuck-phrase config) is done: `engine/config/engine.config.json`,
   `engine/src/talk_engine/config.py` + tests (decision 12).
-- Part 3 (matcher): start-up half is done (`matcher.py`, decision 14).
-- **Next step:** walk through `match()` line by line, then its tests.
+- Part 3 (matcher) is done for the skeleton: `match()`, exact `resolve_term()`,
+  empty-input `is_hesitation()` (`matcher.py`, decision 14). The owner reviews
+  the code and tests next.
+- **Next step:** part 4, the ladder + step-down (decision 15).
 - Open:
   - The seed (decision 16): bookshop or the mosque scene.
-  - Stuck-phrase edge cases E1–E5 (decision 14).
+  - Stuck-phrase edge cases E1–E4 and E6 (decision 14).
   - No CI yet.
 
 ## Checks (run from `engine/`)
