@@ -102,6 +102,9 @@ faster per object, which is negligible).
   - E6: the article. Exact resolution treats "الطبعة" and "طبعة" as different
     words, so a learner saying "ما معنى الطبعة" with target "طبعة" gets
     "which word?". To decide: strip "ال" before comparing, or list both forms
-    in the seed.
+    in the seed. Owner's direction (2026-11-18): accommodate it, because the
+    transcriber is likely to add or drop "ال" by mistake, so a correct word
+    must not fail over the article. Revisit with evidence from the first
+    real transcripts (voice part).
 - Hesitation (spec: "uhh", "hmm", "…", empty transcript → rung 2) is a
   separate check, not built yet; the stuck matcher returns None for it.
