@@ -43,6 +43,9 @@ The owner is learning to engineer, not vibe code. They steer; Claude supports.
     question, answer that question only. Do not run extra commands, start
     other work or add unrequested sections; run something only if it is needed
     to answer the question.
+12. **Keep `docs/journal.md` current.** Every time a test is added, changed or
+    removed for a reason, add an entry (what happened → how it was found →
+    what changed → the lesson) and update the "Tests over time" table.
 
 ## Where we are
 
