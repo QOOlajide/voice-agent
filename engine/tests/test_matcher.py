@@ -219,7 +219,17 @@ def test_resolution_works_on_a_real_match() -> None:  # matcher + resolution
 # --- said_nothing(): is there nothing in the text? (a fact, not a judgement) -
 
 
-@pytest.mark.parametrize("said", ["", "   ", "…", "؟", "\n"])
+@pytest.mark.parametrize(
+    "said",
+    [
+        "",  # seen: Deepgram can return an empty transcript on silence or noise
+        "؟",  # plausible: Deepgram adds punctuation when punctuate/smart_format is on
+        # assumed, not seen yet; cheap insurance (check against real transcripts)
+        "   ",
+        "…",
+        "\n",
+    ],
+)
 def test_empty_or_punctuation_only_says_nothing(said: str) -> None:
     assert said_nothing(said)
 

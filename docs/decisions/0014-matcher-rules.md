@@ -106,5 +106,10 @@ faster per object, which is negligible).
     transcriber is likely to add or drop "ال" by mistake, so a correct word
     must not fail over the article. Revisit with evidence from the first
     real transcripts (voice part).
+- Evidence for `said_nothing` test rows: an empty transcript is documented
+  for Deepgram (silence, noise); punctuation-only is plausible; "   ", "…"
+  and a line break are assumptions. Task for the voice step: run real
+  Deepgram transcripts (silence, noise, a cough) through the engine and
+  keep or drop the unseen rows with evidence.
 - Hesitation (spec: "uhh", "hmm", "…", empty transcript → rung 2) is a
   separate check, not built yet; the stuck matcher returns None for it.
