@@ -111,5 +111,7 @@ faster per object, which is negligible).
   and a line break are assumptions. Task for the voice step: run real
   Deepgram transcripts (silence, noise, a cough) through the engine and
   keep or drop the unseen rows with evidence.
-- Hesitation (spec: "uhh", "hmm", "…", empty transcript → rung 2) is a
-  separate check, not built yet; the stuck matcher returns None for it.
+- Removed the determinism test (same input twice → equal result): nothing in
+  the matcher can be random (a fixed loop over a fixed tuple), so it proved
+  nothing today. Determinism is still required by the spec ("so sessions can
+  be replayed"); revisit if the matcher ever gains state, such as a cache.

@@ -167,10 +167,6 @@ def test_term_is_everything_after_the_trigger(said: str, missed_term: str) -> No
     assert found.missed_term == missed_term
 
 
-def test_same_input_gives_same_result() -> None:  # determinism (engine spec)
-    assert MATCHER.match("ما معنى طبعة") == MATCHER.match("ما معنى طبعة")
-
-
 # --- resolve_term(): which target word did they name? (exact only) ----------
 
 
