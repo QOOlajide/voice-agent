@@ -49,7 +49,7 @@ The owner is learning to engineer, not vibe code. They steer; Claude supports.
 
 ## Where we are
 
-- Decisions 1–16 recorded. Architecture: `docs/architecture.md`; build order
+- Decisions 1–17 recorded. Architecture: `docs/architecture.md`; build order
   changed by decision 15 (walking skeleton: matcher → ladder → one seed →
   voice). `engine/` is a uv library (Python 3.12, Ruff, strict pyright,
   pytest).
@@ -59,7 +59,8 @@ The owner is learning to engineer, not vibe code. They steer; Claude supports.
 - Part 3 (matcher) is done for the skeleton: `match()`, exact `resolve_term()`,
   `said_nothing()` (`matcher.py`, decision 14). The owner reviews
   the code and tests next.
-- **Next step:** part 4, the ladder + step-down (decision 15).
+- Part 4 (ladder): research done; design recorded (decision 17).
+- **Next step:** the owner outlines the ladder's events and transitions.
 - Open:
   - The seed (decision 16): bookshop or the mosque scene.
   - Stuck-phrase edge cases E1–E4 and E6 (decision 14).
