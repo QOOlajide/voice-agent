@@ -1,6 +1,6 @@
-# Kalam AI
+# KalamAI
 
-Voice-only Arabic practice. Speak now, review later.
+KalamAI is an adaptive Arabic conversational voice agent designed to help learners develop spoken fluency through immersive, low-stakes conversations and progressively tailored assistance when they struggle.
 
 **Live demo:** [https://main.d2wqpxfz1qlk4j.amplifyapp.com/](https://main.d2wqpxfz1qlk4j.amplifyapp.com/)
 
