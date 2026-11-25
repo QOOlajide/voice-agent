@@ -76,6 +76,9 @@ Open (outline next): the full list of events; the transitions; whether the
 rung order lives in `engine.config.json` (the spec's "ladder rules", and how
 OATutor and CTAT store hint sequences) or in code; the "لم أفهم" four times in
 a row gap (hint gaming).
+Also open: the ladder keeps **one** term at a time (spec: "rung 3 on word X
+only"; anything else unresolved "returns later"). If a learner is stuck on
+two separate words at once, should the state hold a list of terms instead?
 
 ## Consequences
 
