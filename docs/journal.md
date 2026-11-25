@@ -18,7 +18,7 @@ with `pytest --collect-only` at every commit that changed the tests:
 | 2026-11-16 | `c5a324d` | 109 | matcher finished: `match()`, resolution, said nothing |
 | 2026-11-16 | `0310730` | 109 | two result tests merged into one parametrized test |
 | 2026-11-18 | `686e777` | 108 | determinism test removed |
-| 2026-11-25 | (this commit) | 118 | ladder state (part 4, slice 1): 10 runs |
+| 2026-11-25 | `22d567d` | 118 | ladder state (part 4, slice 1): 10 runs |
 
 ## Tests that were wrong, or caught something
 
