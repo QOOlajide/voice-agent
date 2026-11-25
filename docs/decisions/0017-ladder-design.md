@@ -51,9 +51,17 @@ Research (part 4):
    success, to avoid the rubber-band effect (one lucky answer snapping
    Khālid back to normal). Trade-off: help stays slightly longer than the
    original contingent rule.
-7. **Last resort, in order:** at step-down 2, after 3 failed rescues in a
-   row, shrink the goal to its required steps (decision 16); end the scene
-   gently only if that fails too. The time limit stays the backstop.
+7. **Last resort, in order:** at step-down 2, the **first** failed rescue
+   shrinks the goal to its required steps (decision 16); one more failed
+   rescue after that ends the scene gently. The time limit stays the
+   backstop. Changed from "3 failed rescues in a row at step-down 2": the
+   owner worked out that this meant 5 failed rescues in all (two to reach
+   step-down 2, then three more), each up to 6 rungs long, far too slow
+   for a learner already at yes/no questions. The "3" was borrowed loosely
+   from Beck & Gong's mastery threshold (three correct in a row), which is
+   about learning a skill, not about failures. Counts live in
+   `failures_at_max` (1 → shrink, 2 → end); the thresholds go in the
+   config.
    Rejected: stepping out of the scene to practise the word (it would feel
    like more teaching).
 8. **"Not trying" vs struggling** cannot be told apart from words alone; the
