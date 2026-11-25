@@ -72,6 +72,15 @@ Research (part 4):
 11. **No state-machine library** (python-statemachine, pytransitions): a new
     dependency for about 8 states, where one small function is clearer.
 
+12. **A "success" is any turn that communicates**, normal answers included,
+    not only a rescue that succeeded: step-down is about the difficulty of
+    the whole conversation, and coping with normal turns is the best sign
+    the learner is ready for more.
+13. **Engine ② gets stricter with step-down.** The spec's level check allows
+    95% known words, but step-down 2 promises "known words only". The level
+    check will use the current step-down level to tighten (for example,
+    100% known at level 2); exact thresholds to tune, in the config.
+
 Open (outline next): the full list of events; the transitions; whether the
 rung order lives in `engine.config.json` (the spec's "ladder rules", and how
 OATutor and CTAT store hint sequences) or in code; the "لم أفهم" four times in
