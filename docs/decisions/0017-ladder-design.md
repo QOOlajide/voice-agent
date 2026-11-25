@@ -89,6 +89,14 @@ Research (part 4):
     check will use the current step-down level to tighten (for example,
     100% known at level 2); exact thresholds to tune, in the config.
 
+14. **The state's guards raise `ValueError`.** pydantic converts only
+    `ValueError` (and `AssertionError`) into a `ValidationError`; other
+    exceptions escape unconverted. `assert` is not used for guards because
+    `python -O` / `PYTHONOPTIMIZE=1` deletes it. New states are built with
+    `model_validate`, because `model_copy(update=…)` skips validation.
+15. **Named `LadderStep`, not `Step`**, because "step" already means a goal
+    step (decision 16).
+
 Open (outline next): the full list of events; the transitions; whether the
 rung order lives in `engine.config.json` (the spec's "ladder rules", and how
 OATutor and CTAT store hint sequences) or in code; the "لم أفهم" four times in

@@ -18,6 +18,7 @@ with `pytest --collect-only` at every commit that changed the tests:
 | 2026-11-16 | `c5a324d` | 109 | matcher finished: `match()`, resolution, said nothing |
 | 2026-11-16 | `0310730` | 109 | two result tests merged into one parametrized test |
 | 2026-11-18 | `686e777` | 108 | determinism test removed |
+| 2026-11-25 | (this commit) | 118 | ladder state (part 4, slice 1): 10 runs |
 
 ## Tests that were wrong, or caught something
 
@@ -86,6 +87,24 @@ Each entry: what happened → how it was found → what changed → the lesson.
 - **Known weak spot, kept on purpose.** In "the result names the pattern",
   two rows use input identical to the pattern text, so they cannot tell the
   pattern apart from the learner's words. The owner chose to keep them.
+
+### Ladder (part 4)
+- **A pydantic trap found before it bit.** The ladder state is frozen, and
+  the pydantic equivalent of `dataclasses.replace` is `model_copy(update=…)`.
+  A quick check showed it does not validate: `step_down=5` was accepted
+  silently, skipping the `Field(ge=0, le=2)` guard. `model_validate` refused
+  it. So the transition function (slice 2) must build each new state with
+  `model_validate`, with a test. Lesson: check what a convenience method
+  skips before relying on it.
+- **`raise ValueError`, not `assert`, for the state's guard.** The guard
+  "no term outside a rescue" raises `ValueError`. Checked: pydantic turns
+  only `ValueError` (and `AssertionError`) into a `ValidationError`; a
+  `TypeError` or `RuntimeError` escapes unconverted. And `python -O` (or
+  `PYTHONOPTIMIZE=1`) deletes `assert` statements: a two-line demo ran past
+  a false assert. Tests are unaffected: with optimization on, the normalize
+  tests still passed (23), and pytest warned that only asserts outside test
+  files are ignored, because it rewrites asserts in test files. Lesson:
+  `assert` in tests, `raise` in code the program depends on.
 
 ### Product decisions that changed the code
 - **Silence is not confusion.** `is_hesitation` was renamed `said_nothing`
