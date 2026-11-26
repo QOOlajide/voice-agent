@@ -143,6 +143,21 @@ uv run pytest
 
 The frontend and Python engine currently operate independently. Running both does not establish a complete real-time conversational session.
 
+## Testing and Engineering Practices
+
+KalamAI's conversation engine is designed to be independently testable without requiring live audio connections or external LLM services.
+
+Development emphasizes:
+
+- **Deterministic behavior:** Predictable and reproducible assistance decisions.
+- **Failure-oriented testing:** Deliberately introducing defects to verify that tests detect incorrect behavior.
+- **Input and state validation:** Pydantic models prevent invalid configurations and rescue ladder states.
+- **Static analysis:** Pyright in strict mode and Ruff for linting and formatting.
+- **Reproducible environments:** Dependency management through uv and a version-controlled lockfile.
+- **Documented engineering decisions:** Architectural decisions, alternatives, trade-offs, and lessons learned are recorded throughout development.
+
+See the [Engineering Journal](docs/journal.md) and [Architecture Decision Records](docs/decisions/) for detailed examples and rationale.
+
 ## Repo
 
 [https://github.com/QOOlajide/voice-agent](https://github.com/QOOlajide/voice-agent)
