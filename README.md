@@ -16,18 +16,29 @@ The goal is not to replace traditional Arabic studies or human interaction, but 
 
 **Live demo:** [https://main.d2wqpxfz1qlk4j.amplifyapp.com/](https://main.d2wqpxfz1qlk4j.amplifyapp.com/)
 
+## Immersive Conversational Practice
+
+KalamAI aims to recreate the contextual and visual cues naturally available during real-world conversations. Scenes are designed to evolve as the conversation progresses, rather than serve as static backgrounds.
+
+For example, if a learner encounters the unfamiliar word كِتَاب during a conversation in a bookstore, Khālid could hold up a book to communicate its meaning without resorting to translation. If the learner continues to struggle, the adaptive conversation engine progressively adjusts the assistance provided.
+
+Visual changes can support both ordinary conversation and rescue ladder assistance. The current specification favors pre-generated, faceless, human-reviewed visual assets, while the implementation of dynamic scene progression and synchronization with speech remains under investigation.
+
+See [Scene visuals and research](docs/ideas.md) and [Scene design decisions](docs/decisions/0016-scenes-goals-target-words.md).
+
 ## Current Development Status
 
 KalamAI is under active development.
 
 **Implemented:**
-- An immersive, voice-first session interface.
+- A voice-first session interface.
 - Arabic text normalization.
 - Configurable, deterministic detection of expressions of confusion.
 - Scene-specific vocabulary resolution.
 - Validated rescue ladder state models.
 
 **Under development:**
+- Immersive conversational environments incorporating interactive props, faceless visual representations, and scene-specific contextual cues.
 - Rescue ladder transitions and progressive assistance.
 - Dynamic conversational difficulty adjustment.
 - Learner-specific proficiency checking.
@@ -36,6 +47,31 @@ KalamAI is under active development.
 The live demo currently showcases the user interface. The adaptive conversation engine is being developed and tested independently.
 
 ## Architecture
+
+**Target architecture (not fully implemented):**
+
+```text
+BROWSER ──audio──► VOICE SERVER (Pipecat)
+                       Transcriber
+                            │
+                            ▼
+                       ENGINE ①
+             Normalize → Matcher → Ladder → Directive
+                            │
+                            ▼
+                       Khālid (LLM)
+                            │
+                            ▼
+                       ENGINE ②
+                    Proficiency check
+                            │
+                            ▼
+                      Text-to-speech
+                            │
+BROWSER ◄──────audio────────┘
+```
+
+The planned scene interface also responds to contextual assistance from the rescue ladder and to ordinary conversational progression. The specification defines prop cue events for rescue assistance; the mechanism for ordinary visual progression is still under investigation.
 
 KalamAI is designed around the separation of natural dialogue generation from programmatic control of conversational difficulty and assistance.
 
