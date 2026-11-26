@@ -35,6 +35,21 @@ KalamAI is under active development.
 
 The live demo currently showcases the user interface. The adaptive conversation engine is being developed and tested independently.
 
+## Architecture
+
+KalamAI is designed around the separation of natural dialogue generation from programmatic control of conversational difficulty and assistance.
+
+Rather than delegating all conversational decisions to a large language model, the architecture introduces two complementary engines:
+
+- **Adaptive conversation engine:** Processes learner utterances, detects expressions of confusion, determines appropriate assistance, and adjusts conversational difficulty.
+- **Proficiency-checking engine:** Evaluates generated dialogue against the learner's proficiency before it is delivered as speech.
+
+This separation is intended to preserve the flexibility of LLM-generated conversations while making key assistance and difficulty-control decisions more predictable, testable, and independently maintainable.
+
+The engines are designed to operate independently of the real-time voice infrastructure, allowing their core logic to be tested without requiring live audio connections or LLM calls.
+
+See [Architecture](docs/architecture.md) for the complete system design.
+
 ## Stack
 
 - Next.js 15 (App Router)
