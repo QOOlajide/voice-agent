@@ -56,14 +56,58 @@ See [Architecture](docs/architecture.md) for the complete system design.
 - Tailwind CSS
 - TypeScript
 
-## Run locally
+## Getting Started
+
+Clone the repository:
+
+```bash
+git clone https://github.com/QOOlajide/voice-agent.git
+cd voice-agent
+```
+
+### Run the frontend
+
+Requires Node.js and npm.
 
 ```bash
 npm install
 npm run dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000). The browser will ask for microphone access when a session starts.
+Open [http://localhost:3000](http://localhost:3000) and grant microphone access when prompted.
+
+### Set up the Python engine
+
+Requires Python 3.12 or later and uv.
+
+Install uv by following the [official installation instructions](https://docs.astral.sh/uv/getting-started/installation/). On macOS with Homebrew:
+
+```bash
+brew install uv
+```
+
+Verify the installation:
+
+```bash
+uv --version
+```
+
+From the repository root:
+
+```bash
+cd engine
+uv sync --locked
+```
+
+### Run the engine tests
+
+From the `engine/` directory:
+
+```bash
+uv run pytest
+```
+
+The frontend and Python engine currently operate independently. Running both does not establish a complete real-time conversational session.
 
 ## Repo
 
