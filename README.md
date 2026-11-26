@@ -14,8 +14,6 @@ KalamAI explores an approach that combines natural, unscripted dialogue with pro
 
 The goal is not to replace traditional Arabic studies or human interaction, but to complement them through accessible, low-stakes conversational practice.
 
-**Live demo:** [https://main.d2wqpxfz1qlk4j.amplifyapp.com/](https://main.d2wqpxfz1qlk4j.amplifyapp.com/)
-
 ## Immersive Conversational Practice
 
 KalamAI aims to recreate the contextual and visual cues naturally available during real-world conversations. Scenes are designed to evolve as the conversation progresses, rather than serve as static backgrounds.
@@ -44,7 +42,7 @@ KalamAI is under active development.
 - Learner-specific proficiency checking.
 - Real-time voice pipeline integration.
 
-The live demo currently showcases the user interface. The adaptive conversation engine is being developed and tested independently.
+**Available now:** [Voice-first interface demo](https://main.d2wqpxfz1qlk4j.amplifyapp.com/). The demo showcases the session interface only; immersive scene interactions, adaptive assistance, and the integrated real-time voice pipeline are not yet available. The adaptive conversation engine is being developed and tested independently.
 
 ## Architecture
 
