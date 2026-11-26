@@ -16,7 +16,24 @@ The goal is not to replace traditional Arabic studies or human interaction, but 
 
 **Live demo:** [https://main.d2wqpxfz1qlk4j.amplifyapp.com/](https://main.d2wqpxfz1qlk4j.amplifyapp.com/)
 
-The UI walks through a sensory-isolated session: welcome, a timed immersive arena, then a completed screen. There are no subtitles during the call. Transcript and grammar review are the intended next step and are not built yet. The app currently uses the browser microphone API only; the audio connection is not built yet.
+## Current Development Status
+
+KalamAI is under active development.
+
+**Implemented:**
+- An immersive, voice-first session interface.
+- Arabic text normalization.
+- Configurable, deterministic detection of expressions of confusion.
+- Scene-specific vocabulary resolution.
+- Validated rescue ladder state models.
+
+**Under development:**
+- Rescue ladder transitions and progressive assistance.
+- Dynamic conversational difficulty adjustment.
+- Learner-specific proficiency checking.
+- Real-time voice pipeline integration.
+
+The live demo currently showcases the user interface. The adaptive conversation engine is being developed and tested independently.
 
 ## Stack
 
