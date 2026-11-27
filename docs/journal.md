@@ -19,7 +19,7 @@ with `pytest --collect-only` at every commit that changed the tests:
 | 2026-11-16 | `0310730` | 109 | two result tests merged into one parametrized test |
 | 2026-11-18 | `686e777` | 108 | determinism test removed |
 | 2026-11-25 | `22d567d` | 118 | ladder state (part 4, slice 1): 10 runs |
-| 2026-11-27 | (this commit) | 124 | ladder state: strict types, non-empty term: 6 runs |
+| 2026-11-27 | `4a12a5f` | 124 | ladder state: strict types, non-empty term: 6 runs |
 
 ## Tests that were wrong, or caught something
 
