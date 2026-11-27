@@ -58,3 +58,36 @@ def test_state_cannot_be_changed_after_creation() -> None:
     state = LadderState()
     with pytest.raises(ValidationError, match="frozen"):
         state.step_down = 2  # type: ignore[misc]
+
+
+@pytest.mark.parametrize(
+    ("field", "value"),
+    [
+        ("step", 3),  # a bare number instead of LadderStep.EXPLAIN
+        ("step", "3"),  # text instead of the enum
+        ("step_down", True),  # yes/no instead of a level
+        ("step_down", "1"),  # text instead of a number
+    ],
+)
+def test_values_of_the_wrong_type_are_refused_not_converted(
+    field: str, value: object
+) -> None:
+    with pytest.raises(ValidationError, match=field):
+        LadderState.model_validate({field: value})
+
+
+def test_an_empty_term_is_refused() -> None:  # lookup can never find ""
+    with pytest.raises(ValidationError, match="term"):
+        LadderState(step=LadderStep.EXPLAIN, term="")
+
+
+def test_a_saved_state_loads_back_from_json() -> None:  # replay from the event log
+    state = LadderState(
+        step=LadderStep.EXPLAIN,
+        step_down=1,
+        term="طبعة",
+        recent_rescues=(False, True),
+        successes_in_a_row=0,
+        failures_at_max=0,
+    )
+    assert LadderState.model_validate_json(state.model_dump_json()) == state

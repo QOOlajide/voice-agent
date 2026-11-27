@@ -19,6 +19,7 @@ with `pytest --collect-only` at every commit that changed the tests:
 | 2026-11-16 | `0310730` | 109 | two result tests merged into one parametrized test |
 | 2026-11-18 | `686e777` | 108 | determinism test removed |
 | 2026-11-25 | `22d567d` | 118 | ladder state (part 4, slice 1): 10 runs |
+| 2026-11-27 | (this commit) | 124 | ladder state: strict types, non-empty term: 6 runs |
 
 ## Tests that were wrong, or caught something
 
@@ -105,6 +106,18 @@ Each entry: what happened → how it was found → what changed → the lesson.
   tests still passed (23), and pytest warned that only asserts outside test
   files are ignored, because it rewrites asserts in test files. Lesson:
   `assert` in tests, `raise` in code the program depends on.
+
+- **A probe found silent conversions.** Feeding the ladder state odd inputs
+  showed pydantic's default "lax mode" accepted `step=3`, `step="3"`,
+  `step_down=True` and `step_down="1"`, quietly converting them, and accepted
+  an empty `term=""`. Only our own code builds these states, so a wrong type
+  means a bug that should fail loudly. Fix: `strict=True` and
+  `min_length=1` on `term`. The 5 new refusal tests failed before the fix
+  (no error was raised) and passed after it. A sixth test checked that
+  strict mode does not break replay: a state saved as JSON (where `step` is
+  the number 3) still loads back exactly, so pydantic's JSON leniency for
+  enums holds. Lesson: probe a model with wrong inputs, not only right ones;
+  "it accepted it" can be the bug.
 
 ### Product decisions that changed the code
 - **Silence is not confusion.** `is_hesitation` was renamed `said_nothing`

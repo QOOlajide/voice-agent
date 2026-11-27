@@ -27,11 +27,14 @@ class LadderState(BaseModel):
     """Everything the ladder remembers between learner turns. Frozen: each turn
     makes a new state, so the old one stays intact for the event log."""
 
-    model_config = ConfigDict(extra="forbid", frozen=True)
+    # strict: our own code builds every state, so a value of the wrong type is a
+    # bug to surface, not a value to convert ("1" or True for step_down).
+    model_config = ConfigDict(extra="forbid", frozen=True, strict=True)
 
     step: LadderStep = LadderStep.NOT_RESCUING
     step_down: int = Field(default=0, ge=0, le=2)  # 0 normal, 2 easiest
-    term: str | None = None  # the word being rescued, if the learner named one
+    # the word being rescued, if the learner named one; never an empty word
+    term: str | None = Field(default=None, min_length=1)
     recent_rescues: tuple[bool, ...] = ()  # recent turns: was each one a rescue?
     successes_in_a_row: int = Field(default=0, ge=0)
     failures_at_max: int = Field(default=0, ge=0)  # failed rescues in a row at 2

@@ -89,7 +89,12 @@ Research (part 4):
     check will use the current step-down level to tighten (for example,
     100% known at level 2); exact thresholds to tune, in the config.
 
-14. **The state's guards raise `ValueError`.** pydantic converts only
+14. **The state is strict, and its term is never empty.** `strict=True`:
+    values of the wrong type (`True` or `"1"` for step-down, `"3"` for the
+    step) are refused instead of converted, because only our code builds
+    states and a wrong type is a bug. Loading from JSON (replay) still works.
+    `term` has `min_length=1`: a real word or `None`, never `""`.
+    The state's guards raise `ValueError`. pydantic converts only
     `ValueError` (and `AssertionError`) into a `ValidationError`; other
     exceptions escape unconverted. `assert` is not used for guards because
     `python -O` / `PYTHONOPTIMIZE=1` deletes it. New states are built with
