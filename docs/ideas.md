@@ -17,6 +17,26 @@ shows a prop over the scene (rescue rung 1). Options raised: AI-generated images
 or Unsplash photos that change as the conversation progresses (many contain
 faces, so filtering is needed); highlighting the important part of the scene.
 
+### 2d. Truly faceless visuals: what can guarantee it
+No AI image model or API guarantees zero faces; they lower the chance. Faces
+can also appear where cropping a person's head does not help: a poster on a
+bookshop wall, a picture on a book cover, a face printed on a shirt. A 100%
+guarantee only comes from building images so faces are impossible:
+
+| Approach | Why it's truly faceless | Trade-off |
+|---|---|---|
+| **3D scenes with headless figures** (mannequin-style hands and torsos, a fixed camera framed below the neck) | the model contains no head geometry, and the camera can't see one | needs 3D assets and some modelling work, but is fully reusable |
+| **Drawn or vector illustration**, made by you or a designer | a person drew every line | slower to make new scenes |
+| **Khālid as an abstract shape**, like the **orb** the spec already chose ("Khālid's presence as an animated orb") | there's no body to draw a face on | less "human" body language |
+| **Human review** of every image | a person checks before it's used | slow for on-demand scenes |
+
+Candidate mix if 100% matters: guaranteed-faceless pieces for everything
+human (headless 3D or drawn hands and torsos, made once and reused), and AI
+generation only for backgrounds and props, checked by a face detector for
+stray faces such as posters. (Owner's current choice for on-demand scenes:
+depth maps cropped at collarbone and wrists + an automatic face detector,
+no human review; "very likely" faceless, not guaranteed.)
+
 ## 3. Facial cues for "stuck" detection (parked)
 Faces carry real signals, but software reading a face without context is
 unreliable (a squint can mean confusion, concentration, glare or needing
