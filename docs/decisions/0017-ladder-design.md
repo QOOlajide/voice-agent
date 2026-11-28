@@ -124,6 +124,35 @@ Research (part 4):
     These start the hand-labelled set the judge must agree with (spec:
     agreement ≥ 85%).
 
+17. **The ladder's events** (inputs to `transition`, one per learner turn),
+    each a small frozen, strict pydantic model; `LadderEvent` is their union:
+    - `LearnerStuck(entry_rung, term)`: the matcher found a stuck phrase
+      (also "لم أفهم" again mid-ladder). Translated once from the matcher's
+      `StuckMatch`, so the ladder does not depend on who noticed (later the
+      judge or silence timing can raise it too).
+    - `LearnerAnswered(used_english, english_parts)`: the learner got their
+      meaning across (item 16).
+    - `LearnerStillStuck`: an answer during a rescue that did not
+      communicate; only the judge can say this, so it is unused until then.
+    - `SaidNothing`: `said_nothing()` is True; changes no state for now
+      (decision 14).
+    The same events apply in every state; the state decides what they mean.
+    They live in `ladder.py`, next to their only user (Fowler: a domain
+    event captures "things that can trigger a change to the state").
+18. **English answers are a field, not a new event.** All English ("the
+    second one") or a mix ("أريد the second edition") is still
+    `LearnerAnswered`, with `used_english=True` and the English parts. The
+    turn moves on normally: Khālid models the Arabic once (for a mix, gives
+    the Arabic for the English part, recast-style, noted for review). It
+    counts as neither a success nor a failure for step-down. Rejected: a
+    separate event with a substate that waits for the Arabic, because the
+    spec says phrase tracking is "Passive only. Help is never gated on
+    saying a phrase". Research: learners switch languages for missing
+    words, emotion and identity (Park et al. 2025, arXiv 2512.23136).
+    To verify at the voice step: how `used_english` is detected (in Arabic
+    mode Deepgram wrote English in Arabic letters; whether `multi` reports a
+    language per word is unverified).
+
 Open (outline next): the full list of events; the transitions; whether the
 rung order lives in `engine.config.json` (the spec's "ladder rules", and how
 OATutor and CTAT store hint sequences) or in code; the "لم أفهم" four times in
