@@ -102,6 +102,28 @@ Research (part 4):
 15. **Named `LadderStep`, not `Step`**, because "step" already means a goal
     step (decision 16).
 
+16. **What "communicates" means** (the judge's field, undefined in the spec;
+    it decides the ladder's "answered" vs "still stuck"). From the
+    learner's side: **the learner got their meaning across: what they said
+    makes clear what they wanted to say, in reply to what Khālid asked or
+    said.** It does not require correct grammar, the target word or good
+    pronunciation (slips, "on target" and recasts cover those). An answer
+    that communicates but skips the target word counts as answered (spec:
+    "gets no rescue; the target returns later"). The judge can only judge
+    it from the words said. First labelled examples, Khālid having asked
+    "أيّ طبعة تريد؟":
+
+    | Learner says | Communicates? |
+    |---|---|
+    | الطبعة الثانية | yes |
+    | الثاني (a slip, no target word) | yes |
+    | أريد… هذا (pointing at a book) | yes |
+    | أريد كتاب (does not answer which edition) | no |
+    | طبعة… لا أعرف… كتاب (no clear meaning) | no |
+
+    These start the hand-labelled set the judge must agree with (spec:
+    agreement ≥ 85%).
+
 Open (outline next): the full list of events; the transitions; whether the
 rung order lives in `engine.config.json` (the spec's "ladder rules", and how
 OATutor and CTAT store hint sequences) or in code; the "لم أفهم" four times in
